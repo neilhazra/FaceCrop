@@ -1,2 +1,0 @@
-Folders with names of people are automatically created
-Folders filled with cropped images
