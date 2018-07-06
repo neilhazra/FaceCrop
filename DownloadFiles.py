@@ -3,15 +3,17 @@ import re
 import urllib2
 import multiprocessing
 import os
+import imghdr
+from PIL import Image
 
 f = open("facescrub_actors.txt", "r")
 
 def save_content((url,name)):
-    print name
     try:
         img = urllib2.urlopen(url)
         with open("RawImages//" + name,"wb") as code:
             code.write(img.read())
+            print name
     except Exception as e:
         pass
 
@@ -22,7 +24,13 @@ for line in f:
     url = s[3]
     name = s[0] + s[2] + ".jpeg"
     if os.path.exists("RawImages//" + name):#make sure the file hasn't already been downloaded
-        continue
+        try:
+            Image.open("RawImages//" + name).verify()
+            print("Skipping " + name)
+            continue
+        except Exception as e:
+            print(e)
+    print("Adding " + name)
     urls_names.append((url,name)) #add url and name to a list of all items to be downloaded
 
 if __name__=="__main__":
