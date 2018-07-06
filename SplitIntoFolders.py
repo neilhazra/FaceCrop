@@ -1,3 +1,4 @@
+#@author Jerry Zhang
 import os, shutil, re
 
 directory = '/home/youbuntu/Documents/Crop/CroppedImages'
